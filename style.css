@@ -1,70 +1,32 @@
+/* Fundo da tela inicial */
 body {
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('img/fundo.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.portfolio {
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-}
-
-.slide {
-  display: none;
-}
-
-.slide.active {
-  display: block;
-}
-
-.btn {
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  width: 80%;
-  text-decoration: none;
-  background: #4169E1;
-  color: white;
-  border-radius: 8px;
-}
-
-.whatsapp {
-  background: #4169E1;
-  color: #000;
-}
-
-.controls {
-  margin-top: 10px;
-}
-
+/* Botões da tela inicial */
 button {
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.portfolio-slider {
-  display: flex;              /* mantém as imagens centralizadas */
-  justify-content: center;    /* centraliza horizontalmente */
-  align-items: center;        /* centraliza verticalmente */
-  overflow: hidden;           /* corta o que ultrapassar o container */
-  width: 100%;                /* ocupa toda a largura da tela */
-  max-width: 100vw;           /* garante que não ultrapasse a tela */
-  box-sizing: border-box;
+    background-color: #4CAF50; /* verde vibrante */
+    color: #FFFFFF; /* texto branco */
+    padding: 15px 30px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 70%;
+    max-width: 300px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.portfolio-slider img {
-  max-width: 100%;   /* não ultrapassa a largura do container */
-  max-height: 80vh;  /* não ultrapassa 80% da altura da tela */
-  height: auto;      /* mantém proporção da imagem */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+button:hover {
+    background-color: #45A049; /* verde um pouco mais escuro no hover */
+    transform: scale(1.05);
