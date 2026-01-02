@@ -30,3 +30,4 @@ button {
 button:hover {
     background-color: #45A049; /* verde um pouco mais escuro no hover */
     transform: scale(1.05);
+}
