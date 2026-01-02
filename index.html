@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magno Pires | Graphic Designer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="portfolio">
+
+  <!-- Slide 1: Intro + Botões -->
+  <div class="slide active">
+    <!-- Botões visíveis de início -->
+    <button class="btn" onclick="goToPortfolio()">🌐 Portfolio</button>
+    <a class="btn whatsapp" 
+       href="https://wa.me/5587991809942?text=Hi%21%20I%20came%20from%20your%20portfolio%20😊" 
+       target="_blank">💬 WhatsApp</a>
+
+    <h1>Magno Pires</h1>
+    <p>Graphic Designer</p>
+  </div>
+
+  <!-- Slide 2: Work Summary -->
+  <div class="slide">
+    <h2>My Work</h2>
+    <p>Branding • Social Media • Visual Identity</p>
+  </div>
+
+  <!-- Slide 3: Portfolio Images Slider -->
+  <div class="slide" id="portfolioSlide">
+    <h2>Portfolio</h2>
+    <div class="portfolio-slider">
+      <img id="slideImg" src="img/page1.jpg" alt="Portfolio Page 1">
+    </div>
+  </div>
+
+  <!-- Slide 4: Contact -->
+  <div class="slide">
+    <h2>Contact</h2>
+    <p>Tap a button below 👇</p>
+    <!-- Botão Portfolio dentro do slide de Contact -->
+    <button class="btn" onclick="goToPortfolio()">🌐 Portfolio</button>
+    <a class="btn whatsapp" 
+       href="https://wa.me/5587991809942?text=Hi%21%20I%20came%20from%20your%20portfolio%20😊" 
+       target="_blank">💬 WhatsApp</a>
+  </div>
+
+</div>
+
+<!-- Navigation Buttons -->
+<div class="controls">
+  <button id="prevBtn" onclick="prevSlide()">⬅ Back</button>
+  <button id="nextBtn" onclick="nextSlide()">Next ➡</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
