@@ -1,92 +1,73 @@
-// ====== Variáveis ======
-let currentSlide = 0; // índice do slide atual
-const slides = document.querySelectorAll(".slide");
-const totalSlides = slides.length;
+const totalPages = 12;
+let currentPage = 1;
 
-const portfolioImages = 12; // número de imagens do portfolio
-let currentPortfolioImg = 1;
+const portfolioImage = document.getElementById('portfolioImage');
+const backBtn = document.getElementById('backBtn');
+const nextBtn = document.getElementById('nextBtn');
+const homeBtn = document.getElementById('homeBtn');
+const navButtons = document.querySelector('.nav-buttons');
 
-const slideImg = document.getElementById("slideImg");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
+const portfolioBtn = document.getElementById('portfolioBtn');
+const whatsappBtn = document.getElementById('whatsappBtn');
+const linkedinBtn = document.getElementById('linkedinBtn');
+const initialButtons = document.querySelector('.initial-buttons');
 
-// ====== Função para mostrar slide ======
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
-  });
+function updateImage() {
+    portfolioImage.src = `img/page${currentPage}.jpg`;
+    portfolioImage.alt = `Portfolio Page ${currentPage}`;
 
-  // Se for o slide de Portfolio, atualiza a imagem
-  if (slides[index].querySelector("#slideImg")) {
-    slideImg.src = `img/page${currentPortfolioImg}.jpg`;
-  }
-
-  updateButtons();
-}
-
-// ====== Função Next ======
-function nextSlide() {
-  // Se estiver no slide de Portfolio e não for a última imagem
-  if (slides[currentSlide].querySelector("#slideImg")) {
-    if (currentPortfolioImg < portfolioImages) {
-      currentPortfolioImg++;
-      slideImg.src = `img/page${currentPortfolioImg}.jpg`;
-      updateButtons();
-      return;
+    if(currentPage === totalPages){
+        nextBtn.style.display = 'none';
+        homeBtn.style.display = 'inline-block';
+    } else {
+        nextBtn.style.display = 'inline-block';
+        homeBtn.style.display = 'none';
     }
-  }
 
-  // Caso contrário, vai para o próximo slide normal
-  if (currentSlide < totalSlides - 1) {
-    currentSlide++;
-    currentPortfolioImg = 1; // reseta imagem do portfolio
-    showSlide(currentSlide);
-  }
+    backBtn.style.display = currentPage > 1 ? 'inline-block' : 'none';
 }
 
-// ====== Função Back ======
-function prevSlide() {
-  // Se estiver no slide de Portfolio e não for a primeira imagem
-  if (slides[currentSlide].querySelector("#slideImg")) {
-    if (currentPortfolioImg > 1) {
-      currentPortfolioImg--;
-      slideImg.src = `img/page${currentPortfolioImg}.jpg`;
-      updateButtons();
-      return;
+// Portfolio inicia o slider
+portfolioBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    initialButtons.style.display = 'none';
+    portfolioImage.style.display = 'block';
+    navButtons.style.display = 'flex';
+    document.body.style.backgroundImage = 'none';
+    currentPage = 1;
+    updateImage();
+});
+
+// WhatsApp abre link
+whatsappBtn.addEventListener('click', () => {
+    window.open(whatsappBtn.href, '_blank');
+});
+
+// LinkedIn abre link
+linkedinBtn.addEventListener('click', () => {
+    window.open(linkedinBtn.href, '_blank');
+});
+
+// Navegação das imagens
+nextBtn.addEventListener('click', () => {
+    if(currentPage < totalPages) {
+        currentPage++;
+        updateImage();
     }
-  }
+});
 
-  // Caso contrário, vai para o slide anterior
-  if (currentSlide > 0) {
-    currentSlide--;
-    showSlide(currentSlide);
-  }
-}
+backBtn.addEventListener('click', () => {
+    if(currentPage > 1) {
+        currentPage--;
+        updateImage();
+    }
+});
 
-// ====== Função do botão Portfolio ======
-function goToPortfolio() {
-  currentSlide = 2;       // índice do slide de Portfolio (começa em 0)
-  currentPortfolioImg = 1; // começa da primeira imagem
-  showSlide(currentSlide);
-}
-
-// ====== Atualiza visibilidade dos botões ======
-function updateButtons() {
-  // Botão Back
-  if (currentSlide === 0 && currentPortfolioImg === 1) {
-    prevBtn.style.display = "none";
-  } else {
-    prevBtn.style.display = "inline-block";
-  }
-
-  // Botão Next
-  if (currentSlide === totalSlides - 1 && 
-      (!slides[currentSlide].querySelector("#slideImg") || currentPortfolioImg === portfolioImages)) {
-    nextBtn.style.display = "none";
-  } else {
-    nextBtn.style.display = "inline-block";
-  }
-}
-
-// ====== Inicializa ======
-showSlide(currentSlide);
+// Início retorna à tela inicial
+homeBtn.addEventListener('click', () => {
+    portfolioImage.style.display = 'none';
+    navButtons.style.display = 'none';
+    initialButtons.style.display = 'flex';
+    document.body.style.backgroundImage = "url('img/background.jpg')";
+    currentPage = 1;
+});
