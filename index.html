@@ -81,12 +81,12 @@
     }
 </style>
 </head>
-<body style="background-image: url('img/background.jpg');">
+<body style="background-image: url('background.jpg');">
 
 <!-- Botões iniciais -->
 <div class="initial-buttons">
     <a id="portfolioBtn" href="#">Portfolio</a>
-    <a id="whatsappBtn" href="https://wa.me/5591999999999" target="_blank">Whatsapp</a>
+    <a id="whatsappBtn" href="https://wa.me/5587991809942" target="_blank">Whatsapp</a>
     <a id="linkedinBtn" href="https://www.linkedin.com/in/magno-pires-776676186?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
 </div>
 
@@ -116,7 +116,7 @@
     const initialButtons = document.querySelector('.initial-buttons');
 
     function updateImage() {
-        portfolioImage.src = `img/page${currentPage}.jpg`;
+        portfolioImage.src = `page${currentPage}.jpg`;
         portfolioImage.alt = `Portfolio Page ${currentPage}`;
 
         if(currentPage === totalPages){
@@ -171,7 +171,7 @@
         portfolioImage.style.display = 'none';
         navButtons.style.display = 'none';
         initialButtons.style.display = 'flex';
-        document.body.style.backgroundImage = "url('img/background.jpg')";
+        document.body.style.backgroundImage = "url('background.jpg')";
         currentPage = 1;
     });
 </script>
