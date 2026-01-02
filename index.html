@@ -1,60 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magno Pires | Graphic Designer</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: background 0.3s;
+    }
+
+    .initial-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .initial-buttons a {
+        background-color: #4169E1; /* Azul Royal */
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 25px;
+        border-radius: 10px;
+        font-size: 18px;
+        min-width: 180px;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .initial-buttons a:hover {
+        background-color: #27408B;
+    }
+
+    #portfolioImage {
+        display: none;
+        max-width: 90%;
+        height: auto;
+        margin-bottom: 20px;
+        border: 3px solid #4169E1;
+        border-radius: 10px;
+    }
+
+    .nav-buttons {
+        display: none;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .nav-buttons button {
+        background-color: #4169E1;
+        color: #fff;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        min-width: 100px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .nav-buttons button:hover {
+        background-color: #27408B;
+    }
+</style>
 </head>
-<body>
+<body style="background-image: url('img/background.jpg');">
 
-<div class="portfolio">
-
-  <!-- Slide 1: Intro + Botões -->
-  <div class="slide active">
-    <!-- Botões visíveis de início -->
-    <button class="btn" onclick="goToPortfolio()">🌐 Portfolio</button>
-    <a class="btn whatsapp" 
-       href="https://wa.me/5587991809942?text=Hi%21%20I%20came%20from%20your%20portfolio%20😊" 
-       target="_blank">💬 WhatsApp</a>
-
-    <h1>Magno Pires</h1>
-    <p>Graphic Designer</p>
-  </div>
-
-  <!-- Slide 2: Work Summary -->
-  <div class="slide">
-    <h2>My Work</h2>
-    <p>Branding • Social Media • Visual Identity</p>
-  </div>
-
-  <!-- Slide 3: Portfolio Images Slider -->
-  <div class="slide" id="portfolioSlide">
-    <h2>Portfolio</h2>
-    <div class="portfolio-slider">
-      <img id="slideImg" src="img/page1.jpg" alt="Portfolio Page 1">
-    </div>
-  </div>
-
-  <!-- Slide 4: Contact -->
-  <div class="slide">
-    <h2>Contact</h2>
-    <p>Tap a button below 👇</p>
-    <!-- Botão Portfolio dentro do slide de Contact -->
-    <button class="btn" onclick="goToPortfolio()">🌐 Portfolio</button>
-    <a class="btn whatsapp" 
-       href="https://wa.me/5587991809942?text=Hi%21%20I%20came%20from%20your%20portfolio%20😊" 
-       target="_blank">💬 WhatsApp</a>
-  </div>
-
+<!-- Botões iniciais -->
+<div class="initial-buttons">
+    <a id="portfolioBtn" href="#">Portfolio</a>
+    <a id="whatsappBtn" href="https://wa.me/5591999999999" target="_blank">Whatsapp</a>
+    <a id="linkedinBtn" href="https://www.linkedin.com/in/magno-pires-776676186?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
 </div>
 
-<!-- Navigation Buttons -->
-<div class="controls">
-  <button id="prevBtn" onclick="prevSlide()">⬅ Back</button>
-  <button id="nextBtn" onclick="nextSlide()">Next ➡</button>
+<!-- Imagem do portfólio -->
+<img id="portfolioImage" src="" alt="Portfolio Page">
+
+<!-- Botões de navegação -->
+<div class="nav-buttons">
+    <button id="backBtn">← Back</button>
+    <button id="nextBtn">Next →</button>
+    <button id="homeBtn" style="display:none;">Início</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+    const totalPages = 12;
+    let currentPage = 1;
+
+    const portfolioImage = document.getElementById('portfolioImage');
+    const backBtn = document.getElementById('backBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const homeBtn = document.getElementById('homeBtn');
+    const navButtons = document.querySelector('.nav-buttons');
+
+    const portfolioBtn = document.getElementById('portfolioBtn');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const linkedinBtn = document.getElementById('linkedinBtn');
+    const initialButtons = document.querySelector('.initial-buttons');
+
+    function updateImage() {
+        portfolioImage.src = `img/page${currentPage}.jpg`;
+        portfolioImage.alt = `Portfolio Page ${currentPage}`;
+
+        if(currentPage === totalPages){
+            nextBtn.style.display = 'none';
+            homeBtn.style.display = 'inline-block';
+        } else {
+            nextBtn.style.display = 'inline-block';
+            homeBtn.style.display = 'none';
+        }
+
+        backBtn.style.display = currentPage > 1 ? 'inline-block' : 'none';
+    }
+
+    // Portfolio inicia o slider
+    portfolioBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        initialButtons.style.display = 'none';
+        portfolioImage.style.display = 'block';
+        navButtons.style.display = 'flex';
+        document.body.style.backgroundImage = 'none';
+        currentPage = 1;
+        updateImage();
+    });
+
+    // WhatsApp abre link
+    whatsappBtn.addEventListener('click', () => {
+        window.open(whatsappBtn.href, '_blank');
+    });
+
+    // LinkedIn abre link
+    linkedinBtn.addEventListener('click', () => {
+        window.open(linkedinBtn.href, '_blank');
+    });
+
+    // Navegação das imagens
+    nextBtn.addEventListener('click', () => {
+        if(currentPage < totalPages) {
+            currentPage++;
+            updateImage();
+        }
+    });
+
+    backBtn.addEventListener('click', () => {
+        if(currentPage > 1) {
+            currentPage--;
+            updateImage();
+        }
+    });
+
+    // Início retorna à tela inicial
+    homeBtn.addEventListener('click', () => {
+        portfolioImage.style.display = 'none';
+        navButtons.style.display = 'none';
+        initialButtons.style.display = 'flex';
+        document.body.style.backgroundImage = "url('img/background.jpg')";
+        currentPage = 1;
+    });
+</script>
+
 </body>
 </html>
